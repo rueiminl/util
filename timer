@@ -1,0 +1,43 @@
+#! /usr/bin/python
+import datetime
+import sys
+import time
+import kbhit
+def main():
+    kb = kbhit.KBHit()
+    anchor = datetime.datetime.now()
+    pause = False
+    while True:
+        if kb.kbhit():
+            c = kb.getch()
+            if ord(c) == 27: # ESC
+                print
+                break
+            if ord(c) == 10: # Enter
+                print
+            if c == 'r': # reset
+                if pause:
+                    delta = datetime.timedelta(0,0,0)
+                    sys.stdout.write("\r0:00:00.000000")
+                    sys.stdout.flush()
+                else:
+                    anchor = datetime.datetime.now() - delta
+            if c == 'p': # pause
+                if pause:
+                    pass
+                else:
+                    pause = True
+                    delta = datetime.datetime.now() - anchor
+            if c == 'c': # continue
+                if pause:
+                    anchor = datetime.datetime.now() - delta
+                    pause = False
+                else:
+                    pass
+        time.sleep(0.01)
+        if not pause:
+            sys.stdout.write("\r%s" % (datetime.datetime.now() - anchor))
+            sys.stdout.flush()
+
+if __name__ == '__main__':
+    main()
