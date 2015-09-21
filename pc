@@ -6,10 +6,10 @@ def main():
     pwd | pbcopy
     """
     proc_pwd = subprocess.Popen(['pwd'], stdout=subprocess.PIPE)
-    pwd = proc_pwd.stdout.readline().rsplit()[0]
+    pwd = proc_pwd.stdout.readline().rsplit('\n')[0]
     if len(sys.argv) > 1:
         pwd += '/' + sys.argv[1]
-    proc_echo = subprocess.Popen(['echo', pwd], stdout = subprocess.PIPE)
+    proc_echo = subprocess.Popen(['echo', '-n', pwd], stdout = subprocess.PIPE)
     proc_pbcopy = subprocess.Popen(['pbcopy'], stdin=proc_echo.stdout)
     proc_echo.stdout.close()
     proc_pbcopy.communicate()
