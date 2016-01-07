@@ -1,0 +1,23 @@
+#! /usr/bin/python
+"""
+motivation: generate some files for testing my fuse file system (18746 project 2)
+"""
+import sys
+import os
+from subprocess import call
+def main():
+    """
+    gen filename length repeat_pattern
+    """
+    if len(sys.argv) < 4:
+        print 'Usage: %s FILENAME LENGTH FILLED_CONTENT' % sys.argv[0]
+        return
+    with open(sys.argv[1], 'w') as f:
+        total_length = int(sys.argv[2])
+        length = len(sys.argv[3])
+        while total_length > 0:
+            f.write(sys.argv[3][0:min(total_length, length)])
+            total_length -= length
+
+if __name__ == '__main__':
+    main()

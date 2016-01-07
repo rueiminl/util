@@ -1,0 +1,29 @@
+#! /usr/bin/python
+"""
+motivation: upload (synchronize) some local (host) files to remote (guest) for helping develop my fuse file system (18746 project 2)
+
+prerequisites: guest vm is on, forward port is configured (localhost:2222 to guest:22), scp without password (keygen in host, upload pub key to guest, ...etc)
+"""
+import sys
+import os
+from subprocess import call
+
+def main():
+    """
+    up filename
+    """
+    src_root = "/Users/Sofya/Desktop/project/StorageSystem/project2"
+    dst_root = "student@127.0.0.1:/home/student/StorageSystem/project2"
+    if len(sys.argv) < 2:
+        print 'Usage: %s FILENAME' % sys.argv[0]
+        return
+    path = sys.argv[1]
+    src = os.path.abspath(path)
+    if not src.startswith(src_root):
+        print 'path is not under the correct directory (hint: should be in %s)' % src_root
+        return
+    dst = dst_root + src[len(src_root):]
+    call(['scp', '-P', '2222', src, dst])
+
+if __name__ == '__main__':
+    main()

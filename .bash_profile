@@ -2,9 +2,11 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export DROPBOX=$HOME/Dropbox
 export REPO=$DROPBOX/repository
+export PROF=$REPO/Profile
 export DIARY=$REPO/diary
 export LEETCODE=$HOME/Dropbox/repository/leetcode
 export DESKTOP=$HOME/Desktop
+export DT=$DESKTOP
 export TEMP=$DESKTOP/temp
 export PROJECT=$DESKTOP/project
 export PROJ=$PROJECT
@@ -15,7 +17,9 @@ export SC=$SHORTCUT
 export CV=$PROJECT/simple-resume-cv
 export DL=$HOME/Downloads
 export UTIL=$PROJ/util
+export PIC=/Users/Sofya/Pictures
 export CHIME=$PROJ/chimehacks2
+export LIB=$DT/lib
 export TRAV=$PROJ/team27/travelpad
 export CMU=$REPO/CMU
 export FUN=$DESKTOP/fun
@@ -24,6 +28,9 @@ export TEST=$DESKTOP/test
 export TODO=$DESKTOP/todo
 export BOOK=$DESKTOP/book
 export DOC=$HOME/Documents
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 function co {
     if (( $# == 0 )); then
         echo "usage: $FUNCNAME [11601|11642|15513|15605|15611|15618|15619|18641|18746|18756|18798|18842]"
@@ -58,3 +65,8 @@ function co {
     esac
 }
 
+
+# Setting PATH for Python 3.5
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+export PATH
